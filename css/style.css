@@ -1,7 +1,7 @@
 /*
 Style sheet for all htmls
 */
-@import "../fonts/styles.css";
+
 
 
 /*MAIN SECTIONS*/
@@ -26,7 +26,6 @@ Style sheet for all htmls
 body{
 	background-color: var(--bg);
 	color: var(--text);
-	font-family: AvenirB;
 }
 .header{
 	background-color: var(--primary);
@@ -62,7 +61,6 @@ fieldset{
 pre{
 	margin: 1vh 1vw 1vh 1vw;
 	width: 90vw;
-	font-family:Avenirl;
 	font-size: 2vmin;
 }
 div{
@@ -84,8 +82,7 @@ ul{
 }
 li{
 	color: var(--bg);	
-	display: block;	
-	font-family: AvenirL;	
+	display: block;		
 	font-size: 2.5vmin;	
 	margin: 0 0 0 0;	
 	padding: 1vh 0 1vh 1vw;	
@@ -110,7 +107,6 @@ li > ul{
 /*FONT TYPES*/
 h1 {
 	color: var(--bg);
-	font-family: "AvenirL";
 	font-size: 5vw;
 	margin: 2vh 2vw 2vh 2vw;
 	padding: 0 0 0 0;
@@ -118,35 +114,30 @@ h1 {
 }
 h2{
 	color: var(--text);
-	font-family: "AvenirB";
 	margin: 1vh 0 0 1vw;
 	padding: 0 0 0 0;
 	font-size: 5vmin;
 }
 h3{
 	color: var(--text);
-	font-family: "AvenirB";
 	margin: 1vh 0 0 1vw;
 	padding: 0 0 0 0;
 	font-size: 4vmin;
 }
 h4{
 	color: var(--text);
-	font-family: "AvenirM";
 	margin: 1vh 0 0 1vw;
 	padding: 0 0 0 0;
 	font-size: 3vmin;
 }
 p{
 	color: var(--text);
-	font-family: "AvenirB";
 	margin: 1vh 0 0 2vw;
 	padding: 0 0 0 0;
 	font-size: 3vmin;
 }
 .description{
 	color: var(--accent);
-	font-family: "AvenirB";
 	margin: 0 0 0 2vw;
 	padding: 0 0 0 0;
 	font-size: 2.5vmin;
@@ -170,7 +161,6 @@ input[type="button"],button{
 	border: none;
 	background-color: var(--primary);
 	font-size: 3vmin;
-	font-family: AvenirB;
 	width: 40vw;
 	left: 40vw;
 	margin: 1vh 0 0 2vw;
@@ -188,7 +178,6 @@ input[type="submit"]{
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	font-size: 4vmin;
-	font-family:AvenirB;
 }
 input[type="checkbox"]{
 	display: -webkit-box;
