@@ -1,0 +1,71 @@
+<div class="header">
+	<div class="title">
+	<h1>{{title}}:{{message}}</h1>
+	</div>
+</div>
+
+<input type="submit" onclick="verify()" value="Submit">
+
+<form action={{action}} method={{method}} accept-charset="utf-8">
+<script src = "/scripts/create.js" type ="text/javascript" encoding= "UTF-8">
+</script>
+
+<ul id="nav_bar">
+	<li class= "active" onclick="changeActive(this)" value="AdditionalDescriptiveText" id="AdditionalDescriptiveText_nav">Pipeline Description</li>
+	<!--
+	<li class= "" onclick ="changeActive(this)" value="notification" id= "notification_nav">Notifications</li>
+	-->
+	<li class= "" onclick="changeActive(this)" value="schedule" id="schedule_nav">Schedules
+
+		<!--
+		<ul>
+			<li class="" onclick="addSched(this)">Add Schedule</li>
+		</ul>
+		-->
+	</li>
+	<li class= "" onclick="changeActive(this)" value="precondition" id = "precondition_nav">Preconditions
+		<ul>
+			<li class="" onclick="addPre(this)">Add Precondition</li>
+		</ul>
+	</li>
+	{{>nav_list}}
+</ul>
+
+<div class="active" id="AdditionalDescriptiveText_div">
+<fieldset>
+<h3>Additional Descriptive Text</h3>
+<p class="description">This does not affect the pipeline in anyway</p>
+<input  type = "text" id = "AdditionalDescriptiveText" style="width:80%" name="AdditionalDescriptiveText">
+</fieldset>
+</div>
+<!--
+<div class="hide" id="notification_div">
+<fieldset>
+<h3>Choose Notifications</h3>
+<p class="description">Both notifications are set to true and are not altered by this form</p>
+<input type="checkbox" id="onFail" name="onFail">
+<p style="display:inline">On Failure</p>
+
+<br>
+<input type="checkbox" id="onSuccess" name="onSuccess">
+<p style="display:inline">On Success</p>
+
+</fieldset>
+
+</div>
+-->
+
+{{> schedule_partial}}
+
+{{> precond_partial}}
+
+<div id="param_div">
+
+{{#each j_data}}
+	{{>(lookup this.partial) this}}
+{{/each}}
+
+</div>
+
+</form>
+

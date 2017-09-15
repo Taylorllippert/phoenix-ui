@@ -1,0 +1,25 @@
+<div class="header">
+	<div class= "title">
+		<h1>Pipeline: </h1>	
+	</div>
+</div>
+
+<form method = "get" action= '/download'>
+	<input type = "submit" value="Download">
+</form>
+
+<div>
+<fieldset 
+style="
+left:0; 
+overflow:scroll; 
+width:100vw;
+height:85vh;
+">
+<pre>
+{{#pprint output}}
+{{this}}
+{{/pprint}}
+</pre>
+</fieldset>
+</div>

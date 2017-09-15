@@ -1,0 +1,288 @@
+/*
+Style sheet for all htmls
+*/
+@import "../fonts/styles.css";
+
+
+/*MAIN SECTIONS*/
+:root{
+	--accent: #0098dc;
+	--active-light: #b8cce1;
+	--active: #4779a8;
+	--bg : #ffffff;
+	--bg-2: #f3f5f6;
+	--bg-3: #eff3f7;
+	--danger: #d03e3a;
+	--divider: #b9bfc6;
+	--info: #4779ab;
+	--primary: #1b344D;
+	--secondary: #2d5072;
+	--success: #80ba4d;
+	--text-2: #70767d;
+	--text-disabled: #b9bfc6;
+	--text: #262626;
+	--warning: #eab24c;
+}
+body{
+	background-color: var(--bg);
+	color: var(--text);
+	font-family: AvenirB;
+}
+.header{
+	background-color: var(--primary);
+	border: none;
+	height: 15vh;
+	left: 0;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+}
+.title{
+	border: none;
+	display:inline-block;
+	margin-top: 2vh;
+	overflow: hidden;
+	width: 70vw;
+}
+fieldset{
+	border: none;
+	background: none;	
+	bottom:0;	
+	height: 85vh;	
+	list-style-type:none;	
+	margin:0 0 0 0;	
+	overflow-y: scroll;
+	padding: 0 0 0 0;	
+	position: fixed;	
+	right: 0;	
+	width: 70vw;
+}
+pre{
+	margin: 1vh 1vw 1vh 1vw;
+	width: 90vw;
+	font-family:Avenirl;
+	font-size: 2vmin;
+}
+div{
+	display: inline-block;
+}
+/*NAVIGATION*/
+ul{
+	background-color: var(--secondary);	
+	border: none;	
+	bottom: 0;	
+	left: 0;	
+	list-style-type: none;	
+	margin: 0 0 0 0;	
+	overflow: auto;	
+	padding: 0 0 0 0;	
+	position: fixed;	
+	top: 15vh;	
+	width: 30vw;
+}
+li{
+	color: var(--bg);	
+	display: block;	
+	font-family: AvenirL;	
+	font-size: 2.5vmin;	
+	margin: 0 0 0 0;	
+	padding: 1vh 0 1vh 1vw;	
+	text-decoration: none;	
+	overflow: hidden;
+}
+li:hover{
+	background-color: var(--active);
+	color: var(--active-light);
+}
+li > ul{
+	display: none;
+	overflow: hidden;
+	position: relative;
+	text-align: left;
+	direction: ltr;
+	padding: 0 0 0 0;
+	width: auto;
+	border: 2px solid;
+	border-color: var(--secondary);
+}
+/*FONT TYPES*/
+h1 {
+	color: var(--bg);
+	font-family: "AvenirL";
+	font-size: 5vw;
+	margin: 2vh 2vw 2vh 2vw;
+	padding: 0 0 0 0;
+	overflow: hidden;
+}
+h2{
+	color: var(--text);
+	font-family: "AvenirB";
+	margin: 1vh 0 0 1vw;
+	padding: 0 0 0 0;
+	font-size: 5vmin;
+}
+h3{
+	color: var(--text);
+	font-family: "AvenirB";
+	margin: 1vh 0 0 1vw;
+	padding: 0 0 0 0;
+	font-size: 4vmin;
+}
+h4{
+	color: var(--text);
+	font-family: "AvenirM";
+	margin: 1vh 0 0 1vw;
+	padding: 0 0 0 0;
+	font-size: 3vmin;
+}
+p{
+	color: var(--text);
+	font-family: "AvenirB";
+	margin: 1vh 0 0 2vw;
+	padding: 0 0 0 0;
+	font-size: 3vmin;
+}
+.description{
+	color: var(--accent);
+	font-family: "AvenirB";
+	margin: 0 0 0 2vw;
+	padding: 0 0 0 0;
+	font-size: 2.5vmin;
+}
+/*INPUTS*/
+input, select{
+	border: 1px solid;
+	border-radius: 25px;
+	border-color: var(--primary);
+	background-color: var(--bg);
+	margin: 1vh 0 0 2vw;
+	padding: 1vh 1vw 1vh 1vw;
+	font-family: AvenirL;
+	font-size: 2.5vmin;
+	color: var(--text-2)
+}
+input[type="button"],button{
+	display: block;
+	position: static;
+	color: var(--accent);
+	border: none;
+	background-color: var(--primary);
+	font-size: 3vmin;
+	font-family: AvenirB;
+	width: 40vw;
+	left: 40vw;
+	margin: 1vh 0 0 2vw;
+	padding: 0 0 0 0;
+}
+input[type="submit"]{
+	position: fixed;
+	top: 2vh;
+	right: 2vw;
+	width: 30vw;
+	height: 11vh;
+	color: var(--bg);
+	background-color: var(--accent);
+	border: none;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	font-size: 4vmin;
+	font-family:AvenirB;
+}
+input[type="checkbox"]{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	width: 3vmin;
+	height: 3vmin;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+	        appearance: none;
+	background: transparent;
+	border-radius: 100%;
+	outline: none;
+	padding: 0 0 0 0;
+  }
+input[type="checkbox"]:checked:before{
+  	content: "  ";
+	position: absolute;
+	width: 3vmin;
+	height: 3vmin;
+	z-index: -1;
+	background-image: url('../images/check.png');
+	background-size: 100%;
+	background-repeat: no-repeat;
+ }
+/*Specific Classes*/
+/*Adds warning after header*/
+.Exclude h3::after{
+	content: "\A WARNING:This field has been disabled";
+	color: var(--accent);
+	display: block;
+}
+/*Hides example sections*/
+.example {
+	display: none;
+}
+/*When section is chosen*/
+.active ul{
+	background-color: var(--secondary);
+	color: var(--bg);
+	display: block;
+	position: static;
+}
+.active{
+	background-color: var(--active);
+	color: var(--active-light);
+}
+.active:hover{
+	background-color: var(--active);
+	color: var(--active-light);
+}
+.hide{
+	display: none;
+}
+/*moves scrollbar to left on navigation*/
+ul{
+	direction:rtl;
+	text-align: left;
+}
+/*Customize scrollbar*/
+::-webkit-scrollbar{
+	width: 1vw;
+	height: 1vw;
+	background-color:var(--secondary);
+}
+::-webkit-scrollbar-track {
+	background-color: var(--secondary);
+	width: 1vw;
+	height: 1vw;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 25px;
+	background-color: var(--accent);
+	width: 1vw;
+	height: 1vw;
+}
+::-webkit-scrollbar-corner{
+	background-color: var(--secondary);
+}
+/*Places MickeyGears image at bottom right*/
+img{
+	z-index:-1;
+	position: fixed;
+	right: 0vw;
+	bottom: 0vh;
+	height: 25vmin;
+	width: 25vmin;
+}

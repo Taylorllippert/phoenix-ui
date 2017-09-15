@@ -1,0 +1,21 @@
+<div class="header">
+<div class= "title">
+	<h1>{{title}}</h1>
+</div>
+</div>
+<form action = {{action}} method = {{method}}>
+
+<div>
+<fieldset style="left:0; overflow: hidden">
+<p style="font-size:large">{{message}}</p>
+	<select name = "tempChoice">
+		{{#each s_list}}
+		<option value = {{this}}>{{this}}</option>
+		{{/each}}
+	</select>
+
+	<input type="submit" value="Submit">
+</fieldset>
+</div>
+</form>
+

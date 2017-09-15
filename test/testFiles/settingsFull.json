@@ -1,0 +1,42 @@
+{
+	"file_locations":{
+		"template":"C:/Users/LIPPT003/Desktop/Phoenix_Project/UI_phoenix/templates",
+		"partials":"C:/Users/LIPPT003/Desktop/Phoenix_Project/UI_phoenix/views/partials"
+		},
+	
+	"template_name":"definition.json",
+	
+	"partial_tags":[
+	    {
+			"name":"managed_partial",
+			"flag":[{"name":"description", "value":"devops managed parameter"}]
+	    },
+	    {
+		    "name":"bool_partial",
+		    "flag":[{"name": "default", "value":"true"},
+		            {"name":"default", "value":"false"}]
+	    },
+	    {
+			"name":"choice_partial",
+			"flag":[{"name":"allowedValues"}]
+	    },
+	    {
+		    "name":"text_partial",
+		    "flag":[{"name":"type", "value":"string"}]
+	    },
+	    {
+		    "name":"int_partial",
+		    "flag":[{"name":"type", "value":"integer"}]
+	 	}
+	    ],
+	"precondition":{
+	      "name": "<id>",
+	      "id": "<id>",
+	      "type": "S3KeyExists",
+	      "s3Key": "#{myPreconditionKeyLocation}/<process>-EDW-<schema>-<table>-<template>-#{format(<format>)}",
+	      "role": "#{myPipelineRole}",
+	      "maximumRetries": "60",
+	      "retryDelay": "1 Minutes"}
+	       
+}
+	          

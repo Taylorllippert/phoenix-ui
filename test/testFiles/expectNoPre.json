@@ -1,0 +1,267 @@
+{
+  "objects": [
+    {
+	      "name":"Load-Database4-stage-phoenix_audit_details-mock_run-Hello",
+	      "id": "ShellCommandActivityId_Load",
+	      "type": "ShellCommandActivity",
+	      "command": "python #{myCodeLocation}/phoenix/phoenixcli/commands/load.py --source_config #{myConfigPath}/#{mySourceConfigName} --target_config #{myConfigPath}/#{myTargetConfigName} --phoenix_config #{myConfigPath}/#{myPhoenixConfigName} --pipeline_id #{@pipelineId} --run_id \"#{name}\" --slice_start_date $1 --slice_end_date $2 --schema_name #{mySchemaName} --table_name #{myTableName} --template_name #{myTemplateName} --load_type #{myLoadType} --delimiter #{myDelimiter} --partition_column #{myPartitionKey} --add_lineage #{myAddLineageFlag} --folder_path_s3 #{myS3FolderPath} --input_compression_type #{myInputCompression} --skip_header #{mySkipHeaderFlag} --escape #{myEscapeFlag} --remove_quotes #{myRemoveQuotesFlag} --fill_record #{myFillRecordFlag} --truncate_columns #{myTruncateColumnsFlag} --reject_threshold #{myLoadRejectThreshold} --purge_inactive_records #{myPurgeInactiveRecordsFlag}",
+	      "scriptArgument":
+		      [
+		        "#{format(@scheduledStartTime,'YYYYMMdd')}",
+		        "#{format(@scheduledEndTime,'YYYYMMdd')}"
+		      ],
+	      "schedule":
+		      {
+		        "ref": "PipelineScheduleOneTime"
+		      },
+	      "onFail":
+		      {
+		        "ref": "OnFailPhoenixSNSAlarm"
+		      },
+	      "maximumRetries": "1",
+	      "retryDelay": "2 Minutes",
+	      "maxActiveInstances": "#{myMaxInstances}",
+	      "workerGroup": "#{myWorkerGroup}"
+      },
+      {
+	        "failureAndRerunMode": "CASCADE",
+	        "schedule":
+		        {
+		          "ref": "PipelineScheduleOneTime"
+		        },
+	        "resourceRole": "#{myResourceRole}",
+	        "role": "#{myPipelineRole}",
+	        "pipelineLogUri": "#{myPipelineLogURI}",
+	        "scheduleType": "timeseries",
+	        "name": "Default",
+	        "id": "Default"
+      },
+      {
+	        "role": "#{myPipelineRole}",
+	        "subject": "Activity #{node.name} of Pipeline Id #{node.@pipelineId} failed",
+	        "name": "On Fail SNS Alarm",
+	        "id": "OnFailPhoenixSNSAlarm",
+	        "message": "Error Message: \\n: #{node.errorMessage} \\n\\n\\n Error Details:\\n #{node.errorStackTrace}",
+	        "type": "SnsAlarm",
+	        "topicArn": "#{mySNSArn}"
+      },
+    {
+	    "period": "3 days",
+	    "startDateTime": "2017-07-19T24:00:00",
+	     "name": "PipelineSchedule",
+	     "id": "PipelineScheduleOneTime",
+	     "type": "Schedule"
+    }
+  ],
+
+  "parameters":
+ 	  [
+ 	    {
+       "id": "myPipelineRole",
+       "description": "Devops managed parameter - Name of the Role to be used by AWS Pipeline",
+       "type": "String",
+       "optional": "false",
+       "default": "datg-phoenix-dev-datapipeline-role"
+     },
+     {
+       "id": "myResourceRole",
+       "description": "Devops managed parameter - Name of the Role to be used by AWS Pipeline for communicating with AWS Resources",
+       "type": "String",
+       "optional": "false",
+       "default": "datg-phoenix-dev-datapipelineresource-role"
+     },
+     {
+       "id": "myConfigPath",
+       "description": "Devops managed parameter - Folder location on the host machine where config files are located",
+       "type": "String",
+       "optional": "false"
+     },
+     {
+       "id": "myPipelineLogURI",
+       "description": "Devops managed parameter - Full S3 Path of the folder where AWS Data Pipeline does ADP System logging",
+       "type": "String",
+       "optional": "false"
+     },
+     {
+       "id": "myWorkerGroup",
+       "description": "Devops managed parameter - Worker group used to host Phoenix and run Phoenix",
+       "type": "String",
+       "optional": "false"
+     },
+     {
+       "id": "myCodeLocation",
+       "description": "Devops managed parameter - Location where code is hosted on the host machine",
+       "type": "String",
+       "optional": "false"
+     },
+     {
+       "id": "myPreconditionKeyLocation",
+       "description": "Devops managed parameter - Full S3 URL of folder where precondition keys are published. This should match the value in the configuration file",
+       "type": "String",
+       "optional": "false"
+     },
+     {
+       "id": "mySNSArn",
+       "description": "Devops managed parameter - ARN to send SNS Alarm emails",
+       "type": "String",
+       "optional": "false"
+     },
+ 	    {
+ 	      "id": "mySourceConfigName",
+ 	      "description": "Name of the configuration for connection details of the source",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "default": "redshift_datg_new_dev_edw_stage_load.cfg"
+ 	    },
+ 	    {
+ 	      "id": "myTargetConfigName",
+ 	      "description": "Name of the configuration for connection details of the target",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "default": "redshift_stage_load.cfg"
+ 	    },
+ 	    {
+ 	      "id": "myPhoenixConfigName",
+ 	      "description": "Name of the configuration for connection details of the phoenix application logging database",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "default": "postgres_app_db.cfg"
+ 	    },
+ 	   {
+  	       "id": "myDatabaseName",
+  	       "description": "Database Name where target table exists",
+  	       "type": "String",
+  	       "optional": "false",
+  	       "default": "edw_stage"
+  	     },
+ 	    {
+ 	      "id": "mySchemaName",
+ 	      "description": "Schema Name where target table exists",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "default": "stage"
+ 	    },
+ 	    {
+ 	      "id": "myTableName",
+ 	      "description": "Target Table Name",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "default": "phoenix_audit_details"
+ 	    },
+ 	    {
+ 	      "id": "myTemplateName",
+ 	      "description": "Name of Template - Usually a descriptor of the purpose of pipeline ex. Backfill, Scheduled or JIRA Number",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "default": "mock_run"
+ 	    },
+ 	    {
+ 	      "id": "myLoadType",
+ 	      "description": "Type of Load",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["append","truncate_load","merge","partition"],
+ 	      "default": "truncate_load"
+ 	    },
+ 	    {
+ 	      "id": "myPartitionKey",
+ 	      "description": "Name of partition column in case load type is Partition",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "default": "None"
+ 	    },
+ 	    {
+ 	      "id": "myAddLineageFlag",
+ 	      "description": "Flag to indicate if lineage information of files being loaded should be added; Requires the target table to have a column of LINEAGE_FILE_NAME",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["true","false"],
+ 	      "default": "false"
+ 	    },
+ 	    {
+ 	      "id": "myS3FolderPath",
+ 	      "description": "Specify full S3 URL of the folder from which files are to be loaded.",
+ 	      "type": "String",
+ 	      "optional": "true",
+ 	      "default": "not-applicable"
+ 	    },
+ 	    {
+ 	      "id": "mySkipHeaderFlag",
+ 	      "description": "Flag to indicate if first rows from the files being loaded should be ignored",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["true","false"],
+ 	      "default": "false"
+ 	    },
+ 	    {
+ 	      "id": "myInputCompression",
+ 	      "description": "Compression type of the files being loaded",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["gzip","bzip2","lzop","none"],
+ 	      "default": "none"
+ 	    },
+ 	    {
+ 	      "id": "myEscapeFlag",
+ 	      "description": "Flag to indicate escape characters from the files being loaded should be ignored",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["true","false"],
+ 	      "default": "true"
+ 	    },
+ 	    {
+ 	      "id": "myRemoveQuotesFlag",
+ 	      "description": "Flag to indicate if quoted strings should be processed ie. quotation marks should be ignored and delimiters within quoted string should be ignored from the files being loaded",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["true","false"],
+ 	      "default": "true"
+ 	    },
+ 	    {
+ 	      "id": "myFillRecordFlag",
+ 	      "description": " Flag to indicate if records with fewer delimiters should be loaded with end columns as NULL.",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["true","false"],
+ 	      "default": "false"
+ 	    },
+ 	    {
+ 	      "id": "myTruncateColumnsFlag",
+ 	      "description": "Flag to indicate if character columns should be truncated in case of Overflow",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["true","false"],
+ 	      "default": "false"
+ 	    },
+ 	    {
+ 	      "id": "myPurgeInactiveRecordsFlag",
+ 	      "description": "Flag to indicate if the records from the target table having IS_ACTIVE = False should be hard-deleted.",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["true","false"],
+ 	      "default": "false"
+ 	    },
+ 	    {
+ 	      "id": "myDelimiter",
+ 	      "description": "Delimiter used in files being loaded.For special characters like | or , or ~, please enclose them in single-quotes",
+ 	      "type": "String",
+ 	      "optional": "false",
+ 	      "allowedValues":["tab",",", "'|'"],
+ 	      "default": "'|'"
+ 	    },
+ 	    {
+ 	      "id": "myLoadRejectThreshold",
+ 	      "description": "Maximum allowed failures for successful load",
+ 	      "type": "Integer",
+ 	      "optional": "false",
+ 	      "default": "3"
+ 	    },
+ 	    {
+ 	      "id": "myMaxInstances",
+ 	      "description": "Maximum allowed instances of activities to run in parallel",
+ 	      "type": "Integer",
+ 	      "optional": "false",
+ 	      "default": "2"
+ 	    }
+ 	  ]
+ }

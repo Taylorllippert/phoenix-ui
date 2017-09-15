@@ -1,0 +1,49 @@
+<div class="hide" id = "schedule_div">
+
+<!--<div class="example" id = "schedule_ex" name = "schedule">-->
+
+	<fieldset>
+		<h3>Schedule</h3>
+		<p>Occurrences:</p>
+		<p class="description">To disable leave blank</p>
+
+		<input type="number" id="occurrences" name="occurrences">
+		
+		<p>Period:</p>
+		<input type="number" id="period" name="period" data-optional= "false">
+		<select id="unit" name="unit">
+
+			<option value = "minutes">Minute(s)</option>
+			<option value = "hours">Hour(s)</option>
+			<option value = "days" selected>Day(s)</option>
+			<option value = "weeks">Week(s)</option>
+			<option value = "months">Month(s)</option>
+		</select>
+		
+		<p>Start Date:</p>
+
+		<input type="number" id="startDate_year" name="startDate_year" min="2000" max="3000" value="2017" data-optional= "false">
+		<input type="number" id="startDate_month" name="startDate_month" min="1" max="12" value="07" data-optional= "false">
+		<input type="number" id="startDate_day" name="startDate_day" min="1" max ="31" value="19" data-optional= "false">
+		
+		<p>Start Time:</p> 
+		<input type="number" id="startTime_hour" name="startTime_hour" min="01" max ="24" value="24" data-optional= "false" style="width:10%">
+		<p style="display:inline">:</p>
+		<input type ="number" id="startTime_min" name="startTime_min" min="00" max = "59" value="00" data-optional="false" style="width:10%">
+		<p style="display:inline">:</p>
+		<input type = "number" id="startTime_sec" name="startTime_sec" min="00" max="59" value="00" data-optional="false" style="width:10%">
+
+		<p>Time Zone: </p>
+		<p class="description">UTC</p>
+		<!--
+		<p>Time Zone:</p> 
+		<select id="timeZone" name="timeZone" data-optional= "false" disabled="disabled">
+			<option value = "UTC">UTC</option>
+		</select>
+		-->
+
+	<!--<input type = "button" value = "Exclude" id="button" onclick="changeExclude(this)">-->
+	</fieldset>
+<!--</div>-->
+
+</div>

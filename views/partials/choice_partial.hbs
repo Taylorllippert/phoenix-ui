@@ -1,0 +1,15 @@
+<div class="hide" id = {{#concat id "_div"}}{{this}}{{/concat}}>
+<fieldset>
+<h3>{{id}}</h3>
+<p class="description">{{description}}</p>
+ 
+	<select id = {{id}} name={{id}} data-optional={{optional}}>
+		{{#each allowedValues}}
+			<option value = {{this}}>{{this}}</option>
+		{{/each}}
+	
+	</select>
+	
+
+</fieldset>
+</div>
